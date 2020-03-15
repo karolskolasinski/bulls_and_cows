@@ -1,15 +1,22 @@
 package bulls_and_cows;
 
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.Random;
 import java.util.Scanner;
 
 class GameChecker {
 
     private Scanner scanner = new Scanner(System.in);
     private Statement statement;
+    private Random random = new Random();
+    private HashSet<Integer> computerDigits = new LinkedHashSet<>();
     private int i;
 
     GameChecker(Statement statement) {
         this.statement = statement;
+        computerDigits();
+        System.out.println(computerDigits);
     }
 
     boolean checkDigits() {
@@ -44,6 +51,12 @@ class GameChecker {
             throw new IllegalArgumentException("You have to provide at least 4 digits!");
         } else if (i > 9999) {
             throw new IllegalArgumentException("You can provide only 4 digits!");
+        }
+    }
+
+    private void computerDigits() {
+        while (computerDigits.size() != 4) {
+            computerDigits.add(random.nextInt(10));
         }
     }
 
