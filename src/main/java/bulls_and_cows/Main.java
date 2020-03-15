@@ -1,22 +1,23 @@
 package bulls_and_cows;
 
+
 public class Main {
     public static void main(String[] args) {
 
         /*VARIABLES*/
         boolean flag = false;
         Statement statement = new Statement();
+        GameChecker gameChecker = new GameChecker(statement);
 
         /*MESSAGES*/
-        statement.hello();
+        statement.logoAndVersion();
         statement.instructions();
+        statement.provideFourDigits();
 
         /*PARSER*/
         do {
-            if () {
-                flag = true;
-            }
-
+            flag = gameChecker.checkDigits();
         } while (!flag);
     }
+
 }

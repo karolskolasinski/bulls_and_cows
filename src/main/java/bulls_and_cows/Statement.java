@@ -9,6 +9,7 @@ import java.io.IOException;
 
 class Statement {
 
+    /*VARIABLES*/
     private String version = getAppVersion();
     private String helloMessage =
             "  ____  _   _ _     _     ____                    _    ____ _____        ______  \n" +
@@ -24,9 +25,12 @@ class Statement {
             "Example:\n" +
             "Secret number: 4271\n" +
             "Opponent's try: 1234\n" +
-            "Answer: 1 bull and 2 cows [1B2C]. (The bull is \"2\", the cows are \"4\" and \"1\".)";
+            "Answer: 1 bull and 2 cows [1B2C]. (The bull is \"2\", the cows are \"4\" and \"1\".)\n";
+    private String provideFourDigits = "Provide four digits:";
 
-    void hello() {
+
+    /*METHODS*/
+    void logoAndVersion() {
         System.out.println(helloMessage);
     }
 
@@ -46,4 +50,9 @@ class Statement {
     void instructions() {
         System.out.println(instructions);
     }
+
+    void provideFourDigits() {
+        System.out.println(provideFourDigits);
+    }
+
 }
