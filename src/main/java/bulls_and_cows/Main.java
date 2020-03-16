@@ -7,7 +7,7 @@ public class Main {
         /*VARIABLES*/
         boolean flag = false;
         Messages messages = new Messages();
-        GameChecker gameChecker = new GameChecker(messages);
+        GameController gameController = new GameController(messages);
 
         /*MESSAGES*/
         messages.logoAndVersion();
@@ -16,7 +16,7 @@ public class Main {
 
         /*PARSER*/
         do {
-            flag = gameChecker.checkDigits();
+            flag = gameController.checkDigits();
         } while (!flag);
     }
 

@@ -3,17 +3,18 @@ package bulls_and_cows;
 import java.util.*;
 import java.util.stream.Collectors;
 
-class GameChecker {
+class GameController {
 
     private Scanner scanner = new Scanner(System.in);
     private Messages messages;
+    private ExceptionController exceptionController = new ExceptionController();
     private Random random = new Random();
     private Set<Integer> computerDigitsOriginal = new LinkedHashSet<>();
     private String userInput;
     private List<Integer> userDigits = new ArrayList<>();
     private List<Integer> computerDigits = new ArrayList<>();
 
-    GameChecker(Messages messages) {
+    GameController(Messages messages) {
         this.messages = messages;
         computerDigits();
         System.out.println(computerDigitsOriginal);
@@ -71,13 +72,10 @@ class GameChecker {
     }
 
     private void checkIfInputContainsOnlyDigits(String userInput) {
-        if (!userInput.matches(".*\\d{4}") && userInput.length() == 4) {
-            throw new IllegalArgumentException("You can provide only digits!");
-        } else if (userInput.length() < 4) {
-            throw new IllegalArgumentException("You have to provide at least 4 digits!");
-        } else if (userInput.length() > 4) {
-            throw new IllegalArgumentException("You can provide only 4 digits!");
-        }//todo all different
+        exceptionController.onlyDigits(userInput);
+        exceptionController.lengthMoreThanFour(userInput);
+        exceptionController.lengthLessThanFour(userInput);
+        exceptionController.allDifferentDigits(userInput);
     }
 
     private void computerDigits() {
