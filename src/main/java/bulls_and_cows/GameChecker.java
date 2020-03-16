@@ -1,62 +1,61 @@
 package bulls_and_cows;
 
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 class GameChecker {
 
     private Scanner scanner = new Scanner(System.in);
-    private Statement statement;
+    private Messages messages;
     private Random random = new Random();
-    private HashSet<Integer> computerDigits = new LinkedHashSet<>();
-    private int i;
+    private Set<Integer> computerDigitsSet = new LinkedHashSet<>();
+    private String userDigitsString;
 
-    GameChecker(Statement statement) {
-        this.statement = statement;
+    GameChecker(Messages messages) {
+        this.messages = messages;
         computerDigits();
-        System.out.println(computerDigits);
+        System.out.println(computerDigitsSet);
     }
 
     boolean checkDigits() {
         if (isInputOnlyDigits()) {
-            try {
-                checkIfInputContainsOnlyDigits();
-                checkMatches();
-            } catch (IllegalArgumentException iae) {
-                System.err.println(iae.getMessage());
-            }
+            return checkMatches();
         }
         return false;
     }
 
-    private void checkMatches() {
+    private boolean checkMatches() {
 
+        return true;
     }
+
 
     private boolean isInputOnlyDigits() {
         try {
-            String s = scanner.nextLine();
-            i = Integer.parseInt(s);
+            userDigitsString = scanner.nextLine();
+            checkIfInputContainsOnlyDigits(Integer.parseInt(userDigitsString));
             return true;
-        } catch (NumberFormatException e) {
-            System.err.println("You can provide only digits!");
+        } catch (Exception e) {
+            if (e instanceof NumberFormatException) {
+                System.err.println("You can provide only digits!");
+            } else {
+                System.err.println(e.getMessage());
+            }
+
         }
         return false;
     }
 
-    private void checkIfInputContainsOnlyDigits() {
-        if (i < 999) {
+    private void checkIfInputContainsOnlyDigits(int userDigits) {
+        if (userDigits < 999) {
             throw new IllegalArgumentException("You have to provide at least 4 digits!");
-        } else if (i > 9999) {
+        } else if (userDigits > 9999) {
             throw new IllegalArgumentException("You can provide only 4 digits!");
         }
     }
 
     private void computerDigits() {
-        while (computerDigits.size() != 4) {
-            computerDigits.add(random.nextInt(10));
+        while (computerDigitsSet.size() != 4) {
+            computerDigitsSet.add(random.nextInt(10));
         }
     }
 

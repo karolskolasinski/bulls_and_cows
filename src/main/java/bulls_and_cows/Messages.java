@@ -7,7 +7,7 @@ import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
 import java.io.FileReader;
 import java.io.IOException;
 
-class Statement {
+class Messages {
 
     /*VARIABLES*/
     private String version = getAppVersion();

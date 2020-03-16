@@ -1,20 +1,18 @@
 package bulls_and_cows;
 
 
-import java.util.Random;
-
 public class Main {
     public static void main(String[] args) {
 
         /*VARIABLES*/
         boolean flag = false;
-        Statement statement = new Statement();
-        GameChecker gameChecker = new GameChecker(statement);
+        Messages messages = new Messages();
+        GameChecker gameChecker = new GameChecker(messages);
 
         /*MESSAGES*/
-        statement.logoAndVersion();
-        statement.instructions();
-        statement.provideFourDigits();
+        messages.logoAndVersion();
+        messages.instructions();
+        messages.provideFourDigits();
 
         /*PARSER*/
         do {
