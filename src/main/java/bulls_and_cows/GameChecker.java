@@ -8,22 +8,28 @@ class GameChecker {
     private Scanner scanner = new Scanner(System.in);
     private Messages messages;
     private Random random = new Random();
-    private Set<Integer> computerDigits = new LinkedHashSet<>();
+    private Set<Integer> computerDigitsOriginal = new LinkedHashSet<>();
     private String userInput;
     private List<Integer> userDigits = new ArrayList<>();
+    private List<Integer> computerDigits = new ArrayList<>();
 
     GameChecker(Messages messages) {
         this.messages = messages;
         computerDigits();
-        System.out.println(computerDigits);
+        System.out.println(computerDigitsOriginal);
     }
 
     boolean checkDigits() {
         if (isInputOnlyDigits()) {
             userInputToList();
+            temporaryComputerDigits();
             return checkMatches();
         }
         return false;
+    }
+
+    private void temporaryComputerDigits() {
+        computerDigits.addAll(computerDigitsOriginal);
     }
 
     private void userInputToList() {
@@ -37,6 +43,7 @@ class GameChecker {
         int bulls = checkBulls();
         checkCows();
 
+        System.err.println(bulls);
         return false;
     }
 
@@ -46,36 +53,40 @@ class GameChecker {
     }
 
     private int checkBulls() {
-
+        int bulls = 0;
+        for (int i = 0; i < computerDigits.size(); i++) {
+            if (computerDigits.get(i).equals(userDigits.get(i))) {
+                bulls++;
+                computerDigits.remove(computerDigits.get(i));
+            }
+        }
+        return bulls;
     }
 
     private boolean isInputOnlyDigits() {
         try {
             userInput = scanner.nextLine();
-            checkIfInputContainsOnlyDigits(Integer.parseInt(userInput));
+            checkIfInputContainsOnlyDigits(userInput);
             return true;
-        } catch (Exception e) {
-            if (e instanceof NumberFormatException) {
-                System.err.println("You can provide only digits!");
-            } else {
-                System.err.println(e.getMessage());
-            }
-
+        } catch (IllegalArgumentException e) {
+            System.err.println(e.getMessage());
         }
         return false;
     }
 
-    private void checkIfInputContainsOnlyDigits(int userDigits) {
-        if (userDigits < 999) {
+    private void checkIfInputContainsOnlyDigits(String userInput) {
+        if (!userInput.matches(".*\\d.{4}") && userInput.length() == 4) {
+            throw new IllegalArgumentException("You can provide only digits!");
+        } else if (userInput.length() < 4) {
             throw new IllegalArgumentException("You have to provide at least 4 digits!");
-        } else if (userDigits > 9999) {
+        } else if (userInput.length() > 4) {
             throw new IllegalArgumentException("You can provide only 4 digits!");
         }
     }
 
     private void computerDigits() {
-        while (computerDigits.size() != 4) {
-            computerDigits.add(random.nextInt(10));
+        while (computerDigitsOriginal.size() != 4) {
+            computerDigitsOriginal.add(random.nextInt(10));
         }
     }
 
