@@ -55,4 +55,8 @@ class Messages {
         System.out.println(provideFourDigits);
     }
 
+    void end() {
+        System.out.println("4B0C");
+        System.out.println("YOU WON!");
+    }
 }
