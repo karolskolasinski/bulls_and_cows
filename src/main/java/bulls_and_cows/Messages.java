@@ -59,4 +59,8 @@ class Messages {
         System.out.println("4B0C");
         System.out.println("YOU WON!");
     }
+
+    void displayBullsAndCows(int bulls, int cows) {
+        System.out.println(bulls + "B" + cows + "C");
+    }
 }

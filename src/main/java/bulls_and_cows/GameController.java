@@ -9,15 +9,16 @@ class GameController {
     private Messages messages;
     private ExceptionController exceptionController = new ExceptionController();
     private Random random = new Random();
-    private Set<Integer> computerDigitsOriginal = new LinkedHashSet<>();
+    private Set<Integer> computerDigitsSet = new LinkedHashSet<>();
     private String userInput;
-    private List<Integer> userDigits = new ArrayList<>();
-    private List<Integer> computerDigits = new ArrayList<>();
+    private List<Integer> userDigitsList = new ArrayList<>();
+    private List<Integer> computerDigitsList = new ArrayList<>();
+    private int bulls;
+    private int cows;
 
     GameController(Messages messages) {
         this.messages = messages;
         computerDigits();
-        System.out.println(computerDigitsOriginal);
     }
 
     boolean checkDigits() {
@@ -30,34 +31,47 @@ class GameController {
     }
 
     private void temporaryComputerDigits() {
-        computerDigits.clear();
-        computerDigits.addAll(computerDigitsOriginal);
+        computerDigitsList.clear();
+        computerDigitsList.addAll(computerDigitsSet);
     }
 
     private void userInputToList() {
-        userDigits.clear();
-        userDigits = Arrays.stream(userInput.split(""))
+        userDigitsList.clear();
+        userDigitsList = Arrays.stream(userInput.split(""))
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
     }
 
     private boolean checkMatches() {
-        int bulls = countBulls();
-        int cows = countkCows();
-        return false;
+        countBullsCountCows();
+        return getResult();
     }
 
-    private int countkCows() {
-        return (int) computerDigits.stream().filter(integer -> userDigits.contains(integer)).count();
+    private boolean getResult() {
+        if (bulls == 4) {
+            messages.end();
+            return true;
+        } else {
+            messages.displayBullsAndCows(bulls, cows);
+            bulls = 0;
+            cows = 0;
+            return false;
+        }
     }
 
-    private int countBulls() {
-        computerDigitsOriginal.forEach(integer -> {
-            if (userDigits.indexOf(integer) != -1) {
-                computerDigits.remove(integer);
+    private void countBullsCountCows() {
+        for (int i = 0; i < computerDigitsList.size(); i++) {
+            for (int j = 0; j < userDigitsList.size(); j++) {
+                if (computerDigitsList.get(i).equals(userDigitsList.get(j))) {
+                    if (i == j) {
+                        bulls++;
+                    } else {
+                        cows++;
+                    }
+                    break;
+                }
             }
-        });
-        return 4 - computerDigits.size();
+        }
     }
 
     private boolean isInputOnlyDigits() {
@@ -79,8 +93,8 @@ class GameController {
     }
 
     private void computerDigits() {
-        while (computerDigitsOriginal.size() != 4) {
-            computerDigitsOriginal.add(random.nextInt(10));
+        while (computerDigitsSet.size() != 4) {
+            computerDigitsSet.add(random.nextInt(10));
         }
     }
 
