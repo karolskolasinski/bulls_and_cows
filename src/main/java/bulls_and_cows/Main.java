@@ -5,7 +5,7 @@ public class Main {
     public static void main(String[] args) {
 
         /*VARIABLES*/
-        boolean flag = false;
+        boolean flag;
         Messages messages = new Messages();
         GameController gameController = new GameController(messages);
 
