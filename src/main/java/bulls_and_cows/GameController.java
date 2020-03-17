@@ -1,7 +1,6 @@
 package bulls_and_cows;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 class GameController {
 
@@ -9,12 +8,12 @@ class GameController {
     private Messages messages;
     private ExceptionController exceptionController = new ExceptionController();
     private Random random = new Random();
-    private Set<Integer> computerDigitsSet = new LinkedHashSet<>();
-    private String userInput;
-    private List<Integer> userDigitsList = new ArrayList<>();
-    private List<Integer> computerDigitsList = new ArrayList<>();
+    private Set<Integer> computerDigits = new LinkedHashSet<>();
+    private String userString;
+    private String computerString;
     private int bulls;
     private int cows;
+    private int attempts;
 
     GameController(Messages messages) {
         this.messages = messages;
@@ -23,23 +22,14 @@ class GameController {
 
     boolean checkDigits() {
         if (isInputOnlyDigits()) {
-            userInputToList();
-            temporaryComputerDigits();
             return checkMatches();
         }
         return false;
     }
 
-    private void temporaryComputerDigits() {
-        computerDigitsList.clear();
-        computerDigitsList.addAll(computerDigitsSet);
-    }
-
-    private void userInputToList() {
-        userDigitsList.clear();
-        userDigitsList = Arrays.stream(userInput.split(""))
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
+    private void computerDigitsToString() {
+        String s = computerDigits.toString();
+        computerString = s.replaceAll("[\\[\\], ]", "");
     }
 
     private boolean checkMatches() {
@@ -48,7 +38,11 @@ class GameController {
     }
 
     private boolean getResult() {
-        if (bulls == 4) {
+        if (attempts == 10) {
+            messages.displayBullsAndCows(bulls, cows);
+            messages.noMoreAttemptsLeft();
+            return true;
+        } else if (bulls == 4) {
             messages.end();
             return true;
         } else {
@@ -60,24 +54,21 @@ class GameController {
     }
 
     private void countBullsCountCows() {
-        for (int i = 0; i < computerDigitsList.size(); i++) {
-            for (int j = 0; j < userDigitsList.size(); j++) {
-                if (computerDigitsList.get(i).equals(userDigitsList.get(j))) {
-                    if (i == j) {
-                        bulls++;
-                    } else {
-                        cows++;
-                    }
-                    break;
-                }
+        for (int i = 0; i < 4; i++) {
+            if (userString.charAt(i) == computerString.charAt(i)) {
+                bulls++;
+            } else if (computerString.contains(userString.charAt(i) + "")) {
+                cows++;
             }
         }
+        attempts++;
     }
 
     private boolean isInputOnlyDigits() {
         try {
-            userInput = scanner.nextLine();
-            checkIfInputContainsOnlyDigits(userInput);
+            messages.attempts(attempts);
+            userString = scanner.nextLine();
+            checkIfInputContainsOnlyDigits(userString);
             return true;
         } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
@@ -93,9 +84,10 @@ class GameController {
     }
 
     private void computerDigits() {
-        while (computerDigitsSet.size() != 4) {
-            computerDigitsSet.add(random.nextInt(10));
+        while (computerDigits.size() != 4) {
+            computerDigits.add(random.nextInt(10));
         }
+        computerDigitsToString();
     }
 
 }
