@@ -23,7 +23,7 @@ class Messages {
 
 
     /*METHODS*/
-    void logoAndVersion() {
+    void logo() {
         System.out.println(helloMessage);
     }
 

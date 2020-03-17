@@ -10,7 +10,7 @@ public class Main {
         GameController gameController = new GameController(messages);
 
         /*MESSAGES*/
-        messages.logoAndVersion();
+        messages.logo();
         messages.instructions();
         messages.provideFourDigits();
 
