@@ -14,14 +14,14 @@ class ExceptionController {
     }
 
     void lengthLessThanFour(String userInput) {
-        if (userInput.length() > 4) {
-            throw new IllegalArgumentException("You can provide only 4 digits!");
+        if (userInput.length() < 4) {
+            throw new IllegalArgumentException("You must provide at least 4 digits!");
         }
     }
 
     void lengthMoreThanFour(String userInput) {
-        if (userInput.length() < 4) {
-            throw new IllegalArgumentException("You must provide at least 4 digits!");
+        if (userInput.length() > 4) {
+            throw new IllegalArgumentException("You can provide only 4 digits!");
         }
     }
 
