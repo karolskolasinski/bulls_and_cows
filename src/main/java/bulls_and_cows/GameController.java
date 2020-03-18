@@ -18,6 +18,8 @@ class GameController {
     private LocalDateTime startTime;
     private LocalDateTime endTime;
 
+    GameController() {
+    }
 
     GameController(Messages messages) {
         this.messages = messages;
@@ -62,7 +64,7 @@ class GameController {
         }
     }
 
-    private void countBullsCountCows() {
+    void countBullsCountCows() {
         for (int i = 0; i < 4; i++) {
             if (userString.charAt(i) == computerString.charAt(i)) {
                 bulls++;
@@ -92,11 +94,26 @@ class GameController {
         exceptionController.allDifferentDigits(userInput);
     }
 
-    private void computerDigits() {
+    void computerDigits() {
         while (computerDigits.size() != 4) {
             computerDigits.add(random.nextInt(10));
         }
         computerDigitsToString();
     }
 
+    void setUserString(String userString) {
+        this.userString = userString;
+    }
+
+    String getComputerString() {
+        return computerString;
+    }
+
+    int getBulls() {
+        return bulls;
+    }
+
+    int getCows() {
+        return cows;
+    }
 }
