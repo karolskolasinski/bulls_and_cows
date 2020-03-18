@@ -1,5 +1,6 @@
 package bulls_and_cows;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 class GameController {
@@ -14,10 +15,14 @@ class GameController {
     private int bulls;
     private int cows;
     private int attempts;
+    private LocalDateTime startTime;
+    private LocalDateTime endTime;
+
 
     GameController(Messages messages) {
         this.messages = messages;
         computerDigits();
+        startTime = LocalDateTime.now();
     }
 
     boolean checkDigits() {
@@ -39,11 +44,15 @@ class GameController {
 
     private boolean getResult() {
         if (attempts == 10) {
+            endTime = LocalDateTime.now();
             messages.displayBullsAndCows(bulls, cows);
             messages.noMoreAttemptsLeft();
+            messages.dispalyComputerDigits(computerString);
+            messages.displayGameTime(startTime, endTime);
             return true;
         } else if (bulls == 4) {
             messages.end();
+            messages.displayGameTime(startTime, endTime);
             return true;
         } else {
             messages.displayBullsAndCows(bulls, cows);
