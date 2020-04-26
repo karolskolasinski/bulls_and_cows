@@ -17,3 +17,5 @@ Opponent's try: 1234
 Answer: 1 bull and 2 cows. (The bull is "2", the cows are "4" and "1".)
 
 The first one to reveal the other's secret number in the least number of guesses wins the game.
+
+![pic start 1](https://raw.githubusercontent.com/karolskolasinski/bulls_and_cows/master/img/pic_full.png)
