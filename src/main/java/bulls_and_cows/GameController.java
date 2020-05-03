@@ -7,7 +7,7 @@ class GameController {
 
     private Scanner scanner = new Scanner(System.in);
     private Messages messages;
-    private ExceptionController exceptionController = new ExceptionController();
+    private UserInputValidator userInputValidator = new UserInputValidator();
     private Random random = new Random();
     private Set<Integer> computerDigits = new LinkedHashSet<>();
     private String userString;
@@ -17,13 +17,14 @@ class GameController {
     private int attempts;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
+    static final int NUMBER_OF_DIGITS = 4;
 
     GameController() {
     }
 
     GameController(Messages messages) {
         this.messages = messages;
-        computerDigits();
+        randomizeComputerDigitsToList();
         startTime = LocalDateTime.now();
     }
 
@@ -34,7 +35,7 @@ class GameController {
         return false;
     }
 
-    private void computerDigitsToString() {
+    private void transformComputerDigitsToString() {
         String s = computerDigits.toString();
         computerString = s.replaceAll("[\\[\\], ]", "");
     }
@@ -48,12 +49,12 @@ class GameController {
         if (attempts == 10) {
             endTime = LocalDateTime.now();
             messages.displayBullsAndCows(bulls, cows);
-            messages.noMoreAttemptsLeft();
-            messages.dispalyComputerDigits(computerString);
+            messages.displayNoMoreAttemptsLeft();
+            messages.displayComputerDigits(computerString);
             messages.displayGameTime(startTime, endTime);
             return true;
-        } else if (bulls == 4) {
-            messages.end();
+        } else if (bulls == NUMBER_OF_DIGITS) {
+            messages.displayTheEnd();
             messages.displayGameTime(startTime, endTime);
             return true;
         } else {
@@ -65,7 +66,7 @@ class GameController {
     }
 
     void countBullsCountCows() {
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < NUMBER_OF_DIGITS; i++) {
             if (userString.charAt(i) == computerString.charAt(i)) {
                 bulls++;
             } else if (computerString.contains(userString.charAt(i) + "")) {
@@ -77,9 +78,9 @@ class GameController {
 
     private boolean isInputOnlyDigits() {
         try {
-            messages.attempts(attempts);
+            messages.displayAttempts(attempts);
             userString = scanner.nextLine();
-            checkIfInputContainsOnlyDigits(userString);
+            validateUserInput(userString);
             return true;
         } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
@@ -87,18 +88,18 @@ class GameController {
         return false;
     }
 
-    private void checkIfInputContainsOnlyDigits(String userInput) {
-        exceptionController.onlyDigits(userInput);
-        exceptionController.lengthMoreThanFour(userInput);
-        exceptionController.lengthLessThanFour(userInput);
-        exceptionController.allDifferentDigits(userInput);
+    private void validateUserInput(String userInput) {
+        userInputValidator.validateIfOnlyDigits(userInput);
+        userInputValidator.validateIfLengthIsMoreThanFour(userInput);
+        userInputValidator.validateIfLengthIsLessThanFour(userInput);
+        userInputValidator.validateIfDigitsAreAllDifferent(userInput);
     }
 
-    void computerDigits() {
-        while (computerDigits.size() != 4) {
+    void randomizeComputerDigitsToList() {
+        while (computerDigits.size() != NUMBER_OF_DIGITS) {
             computerDigits.add(random.nextInt(10));
         }
-        computerDigitsToString();
+        transformComputerDigitsToString();
     }
 
     void setUserString(String userString) {

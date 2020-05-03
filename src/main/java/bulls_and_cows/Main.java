@@ -10,9 +10,9 @@ public class Main {
         GameController gameController = new GameController(messages);
 
         /*MESSAGES*/
-        messages.logo();
-        messages.instructions();
-        messages.provideFourDigits();
+        messages.displayLogo();
+        messages.displayInstructions();
+        messages.displayMessageProvideFourDigits();
 
         /*PARSER*/
         do {

@@ -11,7 +11,7 @@ class GameControllerTest {
     @Test
     void shouldcountBullsAndCountCows() {
         //given
-        gameController.computerDigits();
+        gameController.randomizeComputerDigitsToList();
         gameController.setUserString(gameController.getComputerString());
 
         //when

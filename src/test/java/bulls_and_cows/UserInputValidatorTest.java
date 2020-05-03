@@ -9,14 +9,14 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class ExceptionControllerTest {
+class UserInputValidatorTest {
 
-    private ExceptionController exceptionController = new ExceptionController();
+    private UserInputValidator userInputValidator = new UserInputValidator();
 
     @ParameterizedTest
     @MethodSource("givenStringDuplicated")
     void exceptionShouldBeThrownIfUserInputContainsDuplicatedCharacters(String userInput) {
-        assertThrows(IllegalArgumentException.class, () -> exceptionController.allDifferentDigits(userInput));
+        assertThrows(IllegalArgumentException.class, () -> userInputValidator.validateIfDigitsAreAllDifferent(userInput));
     }
 
     private static Stream<Arguments> givenStringDuplicated() {
@@ -34,7 +34,7 @@ class ExceptionControllerTest {
     @ParameterizedTest
     @MethodSource("givenStringLessThanFour")
     void exceptionShouldBeThrownIfUserInputLengthIsLessThanFour(String userInput) {
-        assertThrows(IllegalArgumentException.class, () -> exceptionController.lengthLessThanFour(userInput));
+        assertThrows(IllegalArgumentException.class, () -> userInputValidator.validateIfLengthIsLessThanFour(userInput));
     }
 
     private static Stream<Arguments> givenStringLessThanFour() {
@@ -50,13 +50,13 @@ class ExceptionControllerTest {
     void exceptionShouldBeThrownIfUserInputLengthIsMoreThanFour() {
         String userInput = "12345";
 
-        assertThrows(IllegalArgumentException.class, () -> exceptionController.lengthMoreThanFour(userInput));
+        assertThrows(IllegalArgumentException.class, () -> userInputValidator.validateIfLengthIsMoreThanFour(userInput));
     }
 
     @ParameterizedTest
     @MethodSource("givenStringNotOnlyDigits")
     void exceptionShouldBeThrownIfUserInputNotContainsOnlyDigits(String userInput) {
-        assertThrows(IllegalArgumentException.class, () -> exceptionController.onlyDigits(userInput));
+        assertThrows(IllegalArgumentException.class, () -> userInputValidator.validateIfOnlyDigits(userInput));
     }
 
     private static Stream<Arguments> givenStringNotOnlyDigits() {

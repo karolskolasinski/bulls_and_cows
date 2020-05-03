@@ -21,24 +21,24 @@ class Messages {
             "Secret number: 4271\n" +
             "Opponent's try: 1234\n" +
             "Answer: 1 bull and 2 cows [1B2C]. (The bull is \"2\", the cows are \"4\" and \"1\".)\n" +
-            "You have 10 attempts to guess the secret code.\n";
+            "You have 10 attempts to guess the secret code (description by Wikipedia).\n";
     private String provideFourDigits = "Provide four digits:";
 
 
     /*METHODS*/
-    void logo() {
+    void displayLogo() {
         System.out.println(helloMessage);
     }
 
-    void instructions() {
+    void displayInstructions() {
         System.out.println(instructions);
     }
 
-    void provideFourDigits() {
+    void displayMessageProvideFourDigits() {
         System.out.println(provideFourDigits);
     }
 
-    void end() {
+    void displayTheEnd() {
         System.out.println("4B0C");
         System.out.println("YOU WON!");
     }
@@ -47,15 +47,15 @@ class Messages {
         System.out.println(bulls + "B" + cows + "C");
     }
 
-    void noMoreAttemptsLeft() {
+    void displayNoMoreAttemptsLeft() {
         System.out.println("No more attempts left: YOU LOST!");
     }
 
-    void attempts(int attempts) {
+    void displayAttempts(int attempts) {
         System.out.print(attempts + 1 + "/10: ");
     }
 
-    void dispalyComputerDigits(String computerDigits) {
+    void displayComputerDigits(String computerDigits) {
         System.out.println("Secret code was: " + computerDigits);
     }
 
@@ -65,14 +65,14 @@ class Messages {
     }
 
     private String getGameTime(LocalDateTime startTime, LocalDateTime endTime) {
-        long totalSeconds = calcualteOverallDuration(startTime, endTime);
+        long totalSeconds = calculateOverallDuration(startTime, endTime);
         long hours = calculateDurationInHours(totalSeconds);
         long minutes = calculateDurationInMinutes(totalSeconds);
         long seconds = calculateDurationInSeconds(totalSeconds);
         return String.format("Running time: %02d:%02d:%02d", hours, minutes, seconds);
     }
 
-    private long calcualteOverallDuration(LocalDateTime startTime, LocalDateTime endTime) {
+    private long calculateOverallDuration(LocalDateTime startTime, LocalDateTime endTime) {
         return Duration.between(startTime, endTime).getSeconds();
     }
 
