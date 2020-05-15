@@ -5,37 +5,30 @@ import java.time.LocalDateTime;
 
 class Messages {
 
-    /*VARIABLES*/
-    private String helloMessage =
-            "  ____  _   _ _     _     ____                    _    ____ _____        ______  \n" +
-                    " | __ )| | | | |   | |   / ___|    __ _ _ __   __| |  / ___/ _ \\ \\      / / ___| \n" +
-                    " |  _ \\| | | | |   | |   \\___ \\   / _` | '_ \\ / _` | | |  | | | \\ \\ /\\ / /\\___ \\ \n" +
-                    " | |_) | |_| | |___| |___ ___) | | (_| | | | | (_| | | |__| |_| |\\ V  V /  ___) |\n" +
-                    " |____/ \\___/|_____|_____|____/   \\__,_|_| |_|\\__,_|  \\____\\___/  \\_/\\_/  |____/ \n" +
-                    "                                                   by karolskolsinski@gamil.com\n";
-    private String instructions = "Try to guess a 4-digit secret number. " +
-            "The digits are all different. " +
-            "Computer gives the number of matches. \n" +
-            "If the matching digits are in their right positions, they are \"bulls\", if in different positions, they are \"cows\". \n" +
-            "Example:\n" +
-            "Secret number: 4271\n" +
-            "Opponent's try: 1234\n" +
-            "Answer: 1 bull and 2 cows [1B2C]. (The bull is \"2\", the cows are \"4\" and \"1\".)\n" +
-            "You have 10 attempts to guess the secret code (description by Wikipedia).\n";
-    private String provideFourDigits = "Provide four digits:";
-
-
     /*METHODS*/
     void displayLogo() {
-        System.out.println(helloMessage);
+        System.out.println("  ____  _   _ _     _     ____                    _    ____ _____        ______  \n" +
+                " | __ )| | | | |   | |   / ___|    __ _ _ __   __| |  / ___/ _ \\ \\      / / ___| \n" +
+                " |  _ \\| | | | |   | |   \\___ \\   / _` | '_ \\ / _` | | |  | | | \\ \\ /\\ / /\\___ \\ \n" +
+                " | |_) | |_| | |___| |___ ___) | | (_| | | | | (_| | | |__| |_| |\\ V  V /  ___) |\n" +
+                " |____/ \\___/|_____|_____|____/   \\__,_|_| |_|\\__,_|  \\____\\___/  \\_/\\_/  |____/ \n" +
+                "                                                   by karolskolsinski@gamil.com\n");
     }
 
     void displayInstructions() {
-        System.out.println(instructions);
+        System.out.println("Try to guess a 4-digit secret number. " +
+                "The digits are all different. " +
+                "Computer gives the number of matches. \n" +
+                "If the matching digits are in their right positions, they are \"bulls\", if in different positions, they are \"cows\". \n" +
+                "Example:\n" +
+                "Secret number: 4271\n" +
+                "Opponent's try: 1234\n" +
+                "Answer: 1 bull and 2 cows [1B2C]. (The bull is \"2\", the cows are \"4\" and \"1\".)\n" +
+                "You have 10 attempts to guess the secret code (description by Wikipedia).\n");
     }
 
     void displayMessageProvideFourDigits() {
-        System.out.println(provideFourDigits);
+        System.out.println("Provide four digits:");
     }
 
     void displayTheEnd() {
