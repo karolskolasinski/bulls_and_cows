@@ -1,5 +1,7 @@
 #### Bulls and Cows
 
+##### Description
+
 Bulls and Cows (also known as Cows and Bulls or Pigs and Bulls) is an old code-breaking mind or paper and pencil game for two or more players, predating the commercially marketed board game Mastermind.
 
 It is a game that may date back a century or more which uses numbers or words. It is played by two opponents.
@@ -19,5 +21,16 @@ Answer: 1 bull and 2 cows. (The bull is "2", the cows are "4" and "1".)
 The first one to reveal the other's secret number in the least number of guesses wins the game.
 
 source: [Wikipedia](https://en.wikipedia.org/wiki/Bulls_and_Cows)
+
+###### Run
+
+To run program type in the console:
+
+`java -jar out/artifacts/bulls_and_cows_jar/bulls_and_cows.jar`
+
+or hit "Run" button.
+
+
+##### PrintScreen
 
 ![pic start 1](https://raw.githubusercontent.com/karolskolasinski/bulls_and_cows/master/img/pic_full.png)
