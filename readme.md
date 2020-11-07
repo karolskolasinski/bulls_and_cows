@@ -22,7 +22,7 @@ The first one to reveal the other's secret number in the least number of guesses
 
 source: [Wikipedia](https://en.wikipedia.org/wiki/Bulls_and_Cows)
 
-###### Run
+##### Run
 
 To run program type in the console:
 
