@@ -5,11 +5,11 @@ import java.util.*;
 
 class GameController {
 
-    private Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner = new Scanner(System.in);
     private Messages messages;
-    private UserInputValidator userInputValidator = new UserInputValidator();
-    private Random random = new Random();
-    private Set<Integer> computerDigits = new LinkedHashSet<>();
+    private final UserInputValidator userInputValidator = new UserInputValidator();
+    private final Random random = new Random();
+    private final Set<Integer> computerDigits = new LinkedHashSet<>();
     private String userString;
     private String computerString;
     private int bulls;
